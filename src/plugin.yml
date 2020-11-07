@@ -3,3 +3,6 @@ main: net.Dkamps18.ChannelPoints.main
 author: Dkamps18
 version: 1.0
 api-version: 1.13
+commands:
+  tcp:
+    usage: /tcp connect/settings/disconnnect
