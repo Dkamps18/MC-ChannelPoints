@@ -2,14 +2,13 @@ package net.dkamps18.channelpoints;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.dkamps18.channelpoints.DB.Manager;
-import net.dkamps18.channelpoints.Handler.*;
-import net.dkamps18.channelpoints.Util.DBUtil;
-import net.dkamps18.channelpoints.Util.TwitchApiUtil;
+import net.dkamps18.channelpoints.db.Manager;
+import net.dkamps18.channelpoints.handler.*;
+import net.dkamps18.channelpoints.util.DBUtil;
+import net.dkamps18.channelpoints.util.TwitchApiUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,7 +28,6 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		this.config = new Config(this).getConfig();
-		new DependencyHandler(this);
 		this.db = new Manager(this);
 		this.dbu = new DBUtil(this);
 		this.PubSub = new PubSubHandler(this);

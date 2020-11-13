@@ -1,10 +1,10 @@
-package net.dkamps18.channelpoints.Handler;
+package net.dkamps18.channelpoints.handler;
 
 import com.google.gson.JsonObject;
-import net.dkamps18.channelpoints.Input.DescriptionConversation;
-import net.dkamps18.channelpoints.Input.NameConversation;
+import net.dkamps18.channelpoints.input.DescriptionConversation;
+import net.dkamps18.channelpoints.input.NameConversation;
 import net.dkamps18.channelpoints.Main;
-import net.dkamps18.channelpoints.Types.ChannelPointsReward;
+import net.dkamps18.channelpoints.types.ChannelPointsReward;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

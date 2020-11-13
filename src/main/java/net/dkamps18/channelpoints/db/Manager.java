@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.DB;
+package net.dkamps18.channelpoints.db;
 
 import com.google.gson.JsonObject;
 import java.sql.Connection;

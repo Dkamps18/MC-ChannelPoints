@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.Handler;
+package net.dkamps18.channelpoints.handler;
 
 import net.dkamps18.channelpoints.Main;
 import org.bukkit.entity.Player;

@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: main
-Class-Path: Dkamps18-ChannelPoints/libs/Java-WebSocket-1.5.1.jar Dkamps1
- 8-ChannelPoints/libs/slf4j-nop-1.7.26.jar Dkamps18-ChannelPoints/libs/s
- lf4j-api-1.7.26.jar
-
