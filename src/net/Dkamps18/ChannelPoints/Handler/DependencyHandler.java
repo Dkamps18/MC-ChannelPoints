@@ -18,7 +18,6 @@ public class DependencyHandler {
 
 	public DependencyHandler(main pl) {
 		this.plugin = pl;
-		URLClassLoader cl;
 		try {
 			File lf = new File(this.plugin.getDataFolder() + "/libs");
 			if (!lf.exists()) {
