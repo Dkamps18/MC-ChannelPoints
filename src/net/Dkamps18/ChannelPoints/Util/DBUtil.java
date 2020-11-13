@@ -25,7 +25,7 @@ public class DBUtil {
 				"`id` VARCHAR(36) NOT NULL," +
 				"`owner` VARCHAR(36) NOT NULL," +
 				"`type` VARCHAR(50) NOT NULL," +
-				"`name` INT(45) NOT NULL," +
+				"`name` VARCHAR(40) NOT NULL," +
 				"`price` INT(11) NOT NULL," +
 				"`description` VARCHAR(200) NOT NULL," +
 				"PRIMARY KEY (`id`)" +
