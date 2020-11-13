@@ -1,8 +1,8 @@
 name: Dkamps18-ChannelPoints
-main: net.Dkamps18.ChannelPoints.main
+main: net.dkamps18.channelpoints.Main
 author: Dkamps18
-version: 1.0
-api-version: 1.13
+version: ${project.version}
+api-version: 1.16
 commands:
   tcp:
     usage: /tcp connect/settings/disconnnect

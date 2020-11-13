@@ -1,7 +1,6 @@
-package net.Dkamps18.ChannelPoints.Util;
+package net.dkamps18.channelpoints.Util;
 
 import com.google.gson.JsonObject;
-import net.Dkamps18.ChannelPoints.main;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,13 +9,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import net.dkamps18.channelpoints.Main;
 
 public class TwitchApiUtil {
 
-	private main plugin;
+	private Main plugin;
 
-	public TwitchApiUtil(main pl) {
-		this.plugin = pl;
+	public TwitchApiUtil(Main plugin) {
+		this.plugin = plugin;
 	}
 
 	public String validateauth(String t) {

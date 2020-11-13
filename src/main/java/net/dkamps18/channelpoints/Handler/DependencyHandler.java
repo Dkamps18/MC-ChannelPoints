@@ -1,23 +1,18 @@
-package net.Dkamps18.ChannelPoints.Handler;
-
-import net.Dkamps18.ChannelPoints.main;
-import org.bukkit.craftbukkit.Main;
+package net.dkamps18.channelpoints.Handler;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.net.URLConnection;
+import net.dkamps18.channelpoints.Main;
 
 public class DependencyHandler {
 
-	private main plugin;
+	private Main plugin;
 
-	public DependencyHandler(main pl) {
-		this.plugin = pl;
+	public DependencyHandler(Main plugin) {
+		this.plugin = plugin;
 		try {
 			File lf = new File(this.plugin.getDataFolder() + "/libs");
 			if (!lf.exists()) {

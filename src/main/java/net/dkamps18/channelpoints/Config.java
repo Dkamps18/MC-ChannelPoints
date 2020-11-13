@@ -1,4 +1,4 @@
-package net.Dkamps18.ChannelPoints;
+package net.dkamps18.channelpoints;
 
 import com.google.gson.JsonObject;
 
@@ -10,7 +10,7 @@ public class Config {
 
 	private JsonObject config;
 
-	public Config(main pl) {
+	public Config(Main pl) {
 		File cf = new File(pl.getDataFolder() + "/config.json");
 		if (cf.exists()) {
 			try (FileReader file = new FileReader(pl.getDataFolder() + "/config.json")) {

@@ -1,7 +1,7 @@
-package net.Dkamps18.ChannelPoints.Handler;
+package net.dkamps18.channelpoints.Handler;
 
 import com.google.gson.JsonObject;
-import net.Dkamps18.ChannelPoints.main;
+import net.dkamps18.channelpoints.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -17,14 +17,14 @@ import java.util.concurrent.TimeUnit;
 
 public class PubSubHandler {
 
-	private main plugin;
+	private Main plugin;
 	private WebSocketClient con = null;
 	private List<String> openstreams = new ArrayList<>();
 	public Map<UUID, String> recieve = new HashMap<>();
 	public Map<String, Player> auth = new HashMap<>();
 
-	public PubSubHandler(main pl) {
-		this.plugin = pl;
+	public PubSubHandler(Main plugin) {
+		this.plugin = plugin;
 		try {
 			this.con = new WebSocketClient(new URI("wss://pubsub-edge.twitch.tv")) {
 				@Override
@@ -73,15 +73,10 @@ public class PubSubHandler {
 								PubSubHandler.this.auth.remove(md.get("nonce").getAsString());
 							} else {
 								Player p = PubSubHandler.this.auth.get(md.get("nonce").getAsString());
-								switch (md.get("error").getAsString()) {
-									case "ERR_BADAUTH": {
-										p.sendMessage(ChatColor.DARK_RED + "Invalid authentication");
-										break;
-									}
-									default: {
-										p.sendMessage(ChatColor.DARK_RED + "A unknown error occurred");
-										break;
-									}
+								if ("ERR_BADAUTH".equals(md.get("error").getAsString())) {
+									p.sendMessage(ChatColor.DARK_RED + "Invalid authentication");
+								} else {
+									p.sendMessage(ChatColor.DARK_RED + "A unknown error occurred");
 								}
 								PubSubHandler.this.auth.remove(md.get("nonce").getAsString());
 								PubSubHandler.this.recieve.remove(p.getUniqueId());

@@ -1,20 +1,20 @@
-package net.Dkamps18.ChannelPoints.Handler;
+package net.dkamps18.channelpoints.Handler;
 
-import net.Dkamps18.ChannelPoints.main;
+import net.dkamps18.channelpoints.Main;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class EventHandler implements Listener {
+public class DamageEventHandler implements Listener {
 
-	private main plugin;
+	private Main plugin;
 
-	public EventHandler(main pl) {
-		this.plugin = pl;
-		System.out.println("hi");
+	public DamageEventHandler(Main plugin) {
+		this.plugin = plugin;
 	}
 
-	@org.bukkit.event.EventHandler
+	@EventHandler
 	public void onDamageEvent(EntityDamageEvent e) {
 		if (e.getEntity() instanceof Player) {
 			if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {

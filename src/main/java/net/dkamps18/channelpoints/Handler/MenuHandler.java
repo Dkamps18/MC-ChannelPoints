@@ -1,10 +1,10 @@
-package net.Dkamps18.ChannelPoints.Handler;
+package net.dkamps18.channelpoints.Handler;
 
 import com.google.gson.JsonObject;
-import net.Dkamps18.ChannelPoints.Input.DescriptionConversation;
-import net.Dkamps18.ChannelPoints.Input.NameConversation;
-import net.Dkamps18.ChannelPoints.Types.ChannelPointsReward;
-import net.Dkamps18.ChannelPoints.main;
+import net.dkamps18.channelpoints.Input.DescriptionConversation;
+import net.dkamps18.channelpoints.Input.NameConversation;
+import net.dkamps18.channelpoints.Main;
+import net.dkamps18.channelpoints.Types.ChannelPointsReward;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,12 +22,12 @@ import java.util.*;
 
 public class MenuHandler implements Listener {
 
-	private main plugin;
+	private Main plugin;
 	private Map<UUID, ChannelPointsReward> editingreward = new HashMap<>();
 	private ConversationFactory cf;
 
-	public MenuHandler(main pl) {
-		this.plugin = pl;
+	public MenuHandler(Main plugin) {
+		this.plugin = plugin;
 		this.cf = new ConversationFactory(this.plugin);
 	}
 

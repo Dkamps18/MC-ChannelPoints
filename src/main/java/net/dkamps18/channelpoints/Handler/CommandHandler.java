@@ -1,10 +1,9 @@
-package net.Dkamps18.ChannelPoints.Handler;
+package net.dkamps18.channelpoints.Handler;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import net.Dkamps18.ChannelPoints.main;
+import net.dkamps18.channelpoints.Main;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -16,10 +15,10 @@ import java.sql.ResultSet;
 
 public class CommandHandler {
 
-	private main plugin;
+	private Main plugin;
 	private TextComponent authmsg;
 
-	public CommandHandler(main pl) {
+	public CommandHandler(Main pl) {
 		this.plugin = pl;
 		this.authmsg = new TextComponent(ChatColor.DARK_AQUA + "Please ");
 		TextComponent subComponent = new TextComponent("click here");

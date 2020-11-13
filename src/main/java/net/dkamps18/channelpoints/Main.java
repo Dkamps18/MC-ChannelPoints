@@ -1,21 +1,21 @@
-package net.Dkamps18.ChannelPoints;
+package net.dkamps18.channelpoints;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.Dkamps18.ChannelPoints.DB.Manager;
-import net.Dkamps18.ChannelPoints.Handler.*;
-import net.Dkamps18.ChannelPoints.Util.DBUtil;
-import net.Dkamps18.ChannelPoints.Util.TwitchApiUtil;
+import net.dkamps18.channelpoints.DB.Manager;
+import net.dkamps18.channelpoints.Handler.*;
+import net.dkamps18.channelpoints.Util.DBUtil;
+import net.dkamps18.channelpoints.Util.TwitchApiUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 
-public class main extends JavaPlugin implements Listener {
+public class Main extends JavaPlugin implements Listener {
 
 	private CommandHandler ch = new CommandHandler(this);
 	public PubSubHandler PubSub;
@@ -34,7 +34,7 @@ public class main extends JavaPlugin implements Listener {
 		this.dbu = new DBUtil(this);
 		this.PubSub = new PubSubHandler(this);
 		this.menu = new MenuHandler(this);
-		Bukkit.getServer().getPluginManager().registerEvents(new EventHandler(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new DamageEventHandler(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(this.menu, this);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 			this.PubSub.Ping();
@@ -46,8 +46,8 @@ public class main extends JavaPlugin implements Listener {
 		this.PubSub.Disconnect();
 	}
 
-	@org.bukkit.event.EventHandler
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		return ch.run(sender, cmd, label, args);
 	}
+
 }

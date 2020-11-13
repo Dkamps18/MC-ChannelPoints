@@ -1,19 +1,20 @@
-package net.Dkamps18.ChannelPoints.DB;
+package net.dkamps18.channelpoints.DB;
 
 import com.google.gson.JsonObject;
-import net.Dkamps18.ChannelPoints.main;
+import java.sql.Connection;
 
 import java.io.File;
 import java.sql.DriverManager;
+import net.dkamps18.channelpoints.Main;
 
 public class Manager {
-	private main plugin;
+	private Main plugin;
 	private File dbfile;
-	public java.sql.Connection con;
+	public Connection con;
 
-	public Manager(main pl) {
-		this.plugin = pl;
-		if (pl.config.get("datastore").getAsString().equals("sqlite")) {
+	public Manager(Main plugin) {
+		this.plugin = plugin;
+		if (plugin.config.get("datastore").getAsString().equals("sqlite")) {
 			this.dbfile = new File(this.plugin.getDataFolder().getAbsolutePath() + "/database.db");
 			if (!this.dbfile.exists()) {
 				try {
@@ -28,8 +29,8 @@ public class Manager {
 				e.printStackTrace();
 			}
 
-		} else if (pl.config.get("datastore").getAsString().equals("mysql")) {
-			JsonObject d = pl.config.getAsJsonObject("mysql");
+		} else if (plugin.config.get("datastore").getAsString().equals("mysql")) {
+			JsonObject d = plugin.config.getAsJsonObject("mysql");
 			try {
 				this.con = DriverManager.getConnection("jdbc:mysql://" + d.get("host").getAsString() + ":" + d.get("port").getAsString() + "/" + d.get("database").getAsString() + "?autoReconnect=true&useSSL=false", d.get("user").getAsString(), d.get("password").getAsString());
 			} catch (Exception e) {

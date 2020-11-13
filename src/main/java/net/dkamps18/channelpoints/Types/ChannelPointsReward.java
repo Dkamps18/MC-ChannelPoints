@@ -1,4 +1,4 @@
-package net.Dkamps18.ChannelPoints.Types;
+package net.dkamps18.channelpoints.Types;
 
 public class ChannelPointsReward {
 	public String id;

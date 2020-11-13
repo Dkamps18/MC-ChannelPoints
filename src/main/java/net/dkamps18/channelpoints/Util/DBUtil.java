@@ -1,15 +1,14 @@
-package net.Dkamps18.ChannelPoints.Util;
-
-import net.Dkamps18.ChannelPoints.main;
+package net.dkamps18.channelpoints.Util;
 
 import java.sql.ResultSet;
+import net.dkamps18.channelpoints.Main;
 
 public class DBUtil {
 
-	private main plugin;
+	private Main plugin;
 
-	public DBUtil(main pl) {
-		this.plugin = pl;
+	public DBUtil(Main plugin) {
+		this.plugin = plugin;
 		this.init();
 	}
 

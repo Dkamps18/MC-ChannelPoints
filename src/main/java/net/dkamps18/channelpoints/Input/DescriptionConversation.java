@@ -1,6 +1,6 @@
-package net.Dkamps18.ChannelPoints.Input;
+package net.dkamps18.channelpoints.Input;
 
-import net.Dkamps18.ChannelPoints.main;
+import net.dkamps18.channelpoints.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 
 public class DescriptionConversation extends StringPrompt {
 
-	private main plugin;
+	private Main plugin;
 
-	public DescriptionConversation(main pl) {
-		this.plugin = pl;
+	public DescriptionConversation(Main plugin) {
+		this.plugin = plugin;
 	}
 
 	@Override
