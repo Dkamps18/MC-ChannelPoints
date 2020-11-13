@@ -1,6 +1,5 @@
 package net.Dkamps18.ChannelPoints;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.Dkamps18.ChannelPoints.DB.Manager;

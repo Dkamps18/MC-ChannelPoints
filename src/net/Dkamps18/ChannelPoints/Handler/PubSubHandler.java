@@ -50,7 +50,8 @@ public class PubSubHandler {
 									ResultSet dbr = PubSubHandler.this.plugin.dbu.get_user_data(p.getUniqueId().toString());
 									try {
 										if (dbr.next()) {
-											PubSubHandler.this.plugin.tapi.acceptreward(rid, d.getAsJsonObject("redemption").get("id").getAsString(), dbr.getString("twitchid"), dbr.getString("authtoken"));
+											// See this awesome code by Marenthyu to make the patch requests proxy through https://github.com/Dkamps18/MC-ChannelPoints/issues/1
+											// PubSubHandler.this.plugin.tapi.acceptreward(rid, d.getAsJsonObject("redemption").get("id").getAsString(), dbr.getString("twitchid"), dbr.getString("authtoken"));
 										} else {
 											System.out.println("SOMETHING WEIRD HAPPENED");
 										}
