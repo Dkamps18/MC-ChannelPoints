@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.util;
+package net.dkamps18.channelpoints.Util;
 
 import java.sql.ResultSet;
 import net.dkamps18.channelpoints.Main;

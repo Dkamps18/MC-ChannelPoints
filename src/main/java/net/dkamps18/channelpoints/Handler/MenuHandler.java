@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.handler;
+package net.dkamps18.channelpoints.Handler;
 
 import com.google.gson.JsonObject;
 import java.sql.ResultSet;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import net.dkamps18.channelpoints.Main;
-import net.dkamps18.channelpoints.input.DescriptionConversation;
-import net.dkamps18.channelpoints.input.NameConversation;
-import net.dkamps18.channelpoints.types.ChannelPointsReward;
+import net.dkamps18.channelpoints.Input.DescriptionConversation;
+import net.dkamps18.channelpoints.Input.NameConversation;
+import net.dkamps18.channelpoints.Types.ChannelPointsReward;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

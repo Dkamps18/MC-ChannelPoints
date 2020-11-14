@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.input;
+package net.dkamps18.channelpoints.Input;
 
 import net.dkamps18.channelpoints.Main;
 import org.bukkit.ChatColor;

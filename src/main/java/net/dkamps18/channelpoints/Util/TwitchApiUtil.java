@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.util;
+package net.dkamps18.channelpoints.Util;
 
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;

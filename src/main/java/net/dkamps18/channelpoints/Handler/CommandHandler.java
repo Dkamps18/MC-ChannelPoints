@@ -1,4 +1,4 @@
-package net.dkamps18.channelpoints.handler;
+package net.dkamps18.channelpoints.Handler;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
