@@ -20,7 +20,7 @@ public class Config {
 		} else {
 			try (FileWriter file = new FileWriter(pl.getDataFolder() + "/config.json")) {
 				String t = "{\n" +
-						"\t\"datastore\": \"myslql\",\n" +
+						"\t\"datastore\": \"sqlite\",\n" +
 						"\t\"clientid\": \"pls change me\"\n" +
 						"}";
 				file.write(t);
