@@ -1,13 +1,13 @@
 package net.dkamps18.channelpoints.db;
 
 import com.google.gson.JsonObject;
-import java.sql.Connection;
-
 import java.io.File;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import net.dkamps18.channelpoints.Main;
 
 public class Manager {
+
 	private Main plugin;
 	private File dbfile;
 	public Connection con;

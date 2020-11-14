@@ -11,18 +11,19 @@ public class NameConversation extends StringPrompt {
 
 	private Main plugin;
 
-	public NameConversation(Main pl) {
+	public NameConversation(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@Override
 	public Prompt acceptInput(ConversationContext con, String answer) {
-		this.plugin.menu.nameinput((Player) con.getForWhom(), answer);
+		this.plugin.menuHandler.nameInput((Player) con.getForWhom(), answer);
 		return null;
 	}
 
 	@Override
-	public String getPromptText(ConversationContext arg0) {
+	public String getPromptText(ConversationContext args) {
 		return ChatColor.DARK_AQUA + "Please enter the name for the reward in chat up to " + ChatColor.AQUA + "40 " + ChatColor.DARK_AQUA + "characters";
 	}
+
 }

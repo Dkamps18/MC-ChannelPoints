@@ -1,6 +1,14 @@
 package net.dkamps18.channelpoints.handler;
 
 import com.google.gson.JsonObject;
+import java.net.URI;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import net.dkamps18.channelpoints.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,16 +18,11 @@ import org.bukkit.util.Vector;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
-import java.net.URI;
-import java.sql.ResultSet;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
 public class PubSubHandler {
 
 	private Main plugin;
 	private WebSocketClient con = null;
-	private List<String> openstreams = new ArrayList<>();
+	private List<String> openStreams = new ArrayList<>();
 	public Map<UUID, String> recieve = new HashMap<>();
 	public Map<String, Player> auth = new HashMap<>();
 
@@ -37,7 +40,7 @@ public class PubSubHandler {
 							if (!PubSubHandler.this.recieve.containsValue(d.getAsJsonObject("redemption").get("channel_id").getAsString())) {
 								return;
 							}
-							ResultSet res = PubSubHandler.this.plugin.dbu.getrewardowner(rid);
+							ResultSet res = PubSubHandler.this.plugin.databaseUtil.getRewardOwner(rid);
 							if (res == null) {
 								return;
 							}
@@ -47,10 +50,10 @@ public class PubSubHandler {
 									Location loc = p.getLocation();
 									p.setVelocity(new Vector(loc.getDirection().getX() * 80, loc.getY() * 40, loc.getDirection().getZ() * 80));
 									PubSubHandler.this.plugin.disablefall.add(p.getUniqueId());
-									ResultSet dbr = PubSubHandler.this.plugin.dbu.get_user_data(p.getUniqueId().toString());
+									ResultSet dbr = PubSubHandler.this.plugin.databaseUtil.getUserData(p.getUniqueId().toString());
 									try {
 										if (dbr.next()) {
-											PubSubHandler.this.plugin.tapi.acceptreward(rid, d.getAsJsonObject("redemption").get("id").getAsString(), dbr.getString("twitchid"), dbr.getString("authtoken"));
+											PubSubHandler.this.plugin.twitchApi.acceptReward(rid, d.getAsJsonObject("redemption").get("id").getAsString(), dbr.getString("twitchid"), dbr.getString("authtoken"));
 										} else {
 											System.out.println("SOMETHING WEIRD HAPPENED");
 										}
@@ -134,23 +137,24 @@ public class PubSubHandler {
 			}
 		}
 		String uuid = UUID.randomUUID().toString();
-		if (this.openstreams.contains(id)) {
+		if (this.openStreams.contains(id)) {
 			return true;
 		}
 		this.auth.put(uuid, p);
 		this.con.send("{\"type\":\"LISTEN\",\"nonce\":\"" + uuid + "\",\"data\":{\"topics\":[\"channel-points-channel-v1." + id + "\"],\"auth_token\":\"" + auth + "\"}}");
-		this.openstreams.add(id);
+		this.openStreams.add(id);
 		this.recieve.put(p.getUniqueId(), id);
 		return true;
 	}
 
-	public void Disconnect() {
+	public void disconnect() {
 		this.con.close();
 	}
 
-	public void Ping() {
+	public void ping() {
 		if (this.con.isOpen()) {
 			this.con.send("{\"type\":\"PING\"}");
 		}
 	}
+
 }

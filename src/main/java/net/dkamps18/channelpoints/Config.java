@@ -1,7 +1,6 @@
 package net.dkamps18.channelpoints;
 
 import com.google.gson.JsonObject;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -36,4 +35,5 @@ public class Config {
 	public JsonObject getConfig() {
 		return this.config;
 	}
+
 }

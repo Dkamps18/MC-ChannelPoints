@@ -3,6 +3,7 @@ package net.dkamps18.channelpoints.handler;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import java.sql.ResultSet;
 import net.dkamps18.channelpoints.Main;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -10,8 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.sql.ResultSet;
 
 public class CommandHandler {
 
@@ -29,7 +28,7 @@ public class CommandHandler {
 	}
 
 	public boolean run(CommandSender sender, Command cmd, String label, String[] args) {
-		if (!sender.hasPermission("Dkamps18.ChannelPoints.Use")) {
+		if (!sender.hasPermission("dkamps.channelpoints.use")) {
 			sender.sendMessage(ChatColor.RED + "No permissions");
 		}
 		if (args.length < 1) {
@@ -38,13 +37,13 @@ public class CommandHandler {
 		Player p = (Player) sender;
 		switch (args[0].toLowerCase()) {
 			case "connect": {
-				ResultSet res = this.plugin.dbu.get_user_data(p.getUniqueId().toString());
+				ResultSet res = this.plugin.databaseUtil.getUserData(p.getUniqueId().toString());
 				try {
 					if (res.next()) {
-						this.plugin.PubSub.addStream(p, res.getString("twitchid"), res.getString("authtoken"));
+						this.plugin.pubSubHandler.addStream(p, res.getString("twitchid"), res.getString("authtoken"));
 					} else {
 						p.sendMessage(ChatColor.RED + "No authentication details found");
-						p.spigot().sendMessage(this.authmsg);
+						p.sendMessage(this.authmsg);
 					}
 					return true;
 				} catch (Exception e) {
@@ -53,27 +52,27 @@ public class CommandHandler {
 				}
 			}
 			case "configure": {
-				this.plugin.menu.openmenu(p);
+				this.plugin.menuHandler.openMenu(p);
 				return true;
 			}
 			case "disconnect": {
-				this.plugin.PubSub.recieve.remove(p.getUniqueId().toString());
+				this.plugin.pubSubHandler.recieve.remove(p.getUniqueId());
 				return true;
 			}
 			case "auth": {
 				if (args.length == 2) {
-					String res = this.plugin.tapi.validateauth(args[1]);
+					String res = this.plugin.twitchApi.validateAuth(args[1]);
 					JsonObject data = this.plugin.parser.parse(res).getAsJsonObject();
 					if (data.has("status")) {
 						if (data.get("status").getAsInt() == 401) {
 							sender.sendMessage(ChatColor.RED + "Authentication failure: Invalid access token");
 						} else {
-							sender.sendMessage(ChatColor.RED + "Twitch is having a hard time trying to validate the provided token please try again later");
+							sender.sendMessage(ChatColor.RED + "Twitch is having a hard time trying to validate the provided token. Please try again later");
 						}
 					} else {
 						JsonArray scopes = data.get("scopes").getAsJsonArray();
 						if (scopes.contains(new JsonPrimitive("channel:manage:redemptions")) && scopes.contains(new JsonPrimitive("channel:read:redemptions"))) {
-							if (this.plugin.dbu.add_user_data(p.getUniqueId().toString(), data.get("user_id").getAsString(), args[1])) {
+							if (this.plugin.databaseUtil.addUserData(p.getUniqueId().toString(), data.get("user_id").getAsString(), args[1])) {
 								p.sendMessage(ChatColor.DARK_GREEN + "Successfully authenticated with " + ChatColor.DARK_PURPLE + "Twitch");
 							} else {
 								p.sendMessage(ChatColor.DARK_RED + "Something went wrong, please try again later.");
@@ -83,7 +82,7 @@ public class CommandHandler {
 						}
 					}
 				} else {
-					p.spigot().sendMessage(this.authmsg);
+					p.sendMessage(this.authmsg);
 				}
 				return true;
 			}

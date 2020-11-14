@@ -1,12 +1,13 @@
 package net.dkamps18.channelpoints.util;
 
 import com.google.gson.JsonObject;
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import net.dkamps18.channelpoints.Main;
@@ -19,13 +20,13 @@ public class TwitchApiUtil {
 		this.plugin = plugin;
 	}
 
-	public String validateauth(String t) {
+	public String validateAuth(String t) {
 		Map<String, String> h = new HashMap<>();
 		h.put("Authorization", "OAuth " + t);
 		return this.get("https://id.twitch.tv/oauth2/validate", h);
 	}
 
-	public String createreward(String id, String a, String n, Integer p, String d) {
+	public String createReward(String id, String a, String n, Integer p, String d) {
 		JsonObject b = new JsonObject();
 		b.addProperty("title", n);
 		b.addProperty("cost", p);
@@ -39,7 +40,7 @@ public class TwitchApiUtil {
 		return this.post("https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=" + id, h, b.toString());
 	}
 
-	public void acceptreward(String rid, String red, String id, String a) {
+	public void acceptReward(String rid, String red, String id, String a) {
 		Map<String, String> h = new HashMap<>();
 		h.put("Authorization", "Bearer " + a);
 		h.put("Client-ID", this.plugin.config.get("clientid").getAsString());
@@ -64,7 +65,7 @@ public class TwitchApiUtil {
 			if (str != null) {
 				stuff = str;
 			}
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 			try {
 				String str = in.readLine();
@@ -91,7 +92,7 @@ public class TwitchApiUtil {
 				connection.setRequestProperty(entry.getKey(), entry.getValue());
 			}
 			try (OutputStream os = connection.getOutputStream()) {
-				byte[] input = body.getBytes("utf-8");
+				byte[] input = body.getBytes(StandardCharsets.UTF_8);
 				os.write(input, 0, input.length);
 			}
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -102,7 +103,7 @@ public class TwitchApiUtil {
 			}
 			in.close();
 			stuff = everything.toString();
-		} catch (java.io.IOException e) {
+		} catch (IOException e) {
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 			try {
 				String str = in.readLine();
@@ -118,7 +119,7 @@ public class TwitchApiUtil {
 	}
 
 	private void patch(String target, Map<String, String> headers, String body) {
-		HttpURLConnection connection = null;
+		HttpURLConnection connection;
 		try {
 			URL url = new URL(target);
 			connection = (HttpURLConnection) url.openConnection();
@@ -129,7 +130,7 @@ public class TwitchApiUtil {
 				connection.setRequestProperty(entry.getKey(), entry.getValue());
 			}
 			try (OutputStream os = connection.getOutputStream()) {
-				byte[] input = body.getBytes("utf-8");
+				byte[] input = body.getBytes(StandardCharsets.UTF_8);
 				os.write(input, 0, input.length);
 			}
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -139,9 +140,7 @@ public class TwitchApiUtil {
 				everything.append(line);
 			}
 			in.close();
-			System.out.println(everything.toString());
-		} catch (java.io.IOException e) {
-			System.out.println(e.getMessage());
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -158,7 +157,7 @@ public class TwitchApiUtil {
 				connection.setRequestProperty(entry.getKey(), entry.getValue());
 			}
 			try (OutputStream os = connection.getOutputStream()) {
-				byte[] input = body.getBytes("utf-8");
+				byte[] input = body.getBytes(StandardCharsets.UTF_8);
 				os.write(input, 0, input.length);
 			}
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

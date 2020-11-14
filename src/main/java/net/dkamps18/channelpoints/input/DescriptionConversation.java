@@ -17,12 +17,13 @@ public class DescriptionConversation extends StringPrompt {
 
 	@Override
 	public Prompt acceptInput(ConversationContext con, String answer) {
-		this.plugin.menu.descriptioninput((Player) con.getForWhom(), answer);
+		this.plugin.menuHandler.descriptionInput((Player) con.getForWhom(), answer);
 		return null;
 	}
 
 	@Override
-	public String getPromptText(ConversationContext arg0) {
+	public String getPromptText(ConversationContext args) {
 		return ChatColor.DARK_AQUA + "Please enter the description for the reward in chat up to " + ChatColor.AQUA + "200 " + ChatColor.DARK_AQUA + "characters";
 	}
+
 }

@@ -22,11 +22,7 @@ public class DamageEventHandler implements Listener {
 					e.setCancelled(true);
 					this.plugin.disablefall.remove(e.getEntity().getUniqueId());
 				}
-			} else {
-				return;
 			}
-		} else {
-			return;
 		}
 	}
 }
